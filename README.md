@@ -22,6 +22,6 @@ Este projeto é uma **Calculadora Completa** desenvolvida em C#. Ela permite rea
 
 ## Capturas de Tela
 
-![Captura da Inteface do Projeto]("C:\Users\darvi\Documents\CalculadoraSimples\Imagens\Interface.png")
-![Captura do Histórico]("C:\Users\darvi\Documents\CalculadoraSimples\Imagens\Historico.png")
+![Captura da Inteface do Projeto](Imagens/Interface.png)
+![Captura do Histórico](Imagens/Historico.png)
 
