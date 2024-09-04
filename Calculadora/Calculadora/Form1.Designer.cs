@@ -1,4 +1,12 @@
-﻿namespace Calculadora
+﻿// Projeto: Calculadora Completa
+// Autor: Cleyton Gravito
+// Data da Finalização: 04/09/2024
+// Descrição: Calculadora com operações básicas (adição, subtração, multiplicação, divisão), 
+// e funções avançadas como raiz quadrada, elevação ao quadrado, cálculo de porcentagem, 
+// inversão de sinal e memória de operações, além de conseguir ver o histórico.
+
+
+namespace Calculadora
 {
     partial class Form1
     {
@@ -30,6 +38,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.PnlTitulo = new System.Windows.Forms.Panel();
+            this.LblCalculadora = new System.Windows.Forms.Label();
+            this.IcnLogo = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.BntExit = new System.Windows.Forms.Button();
@@ -79,6 +89,8 @@
             // 
             // PnlTitulo
             // 
+            this.PnlTitulo.Controls.Add(this.LblCalculadora);
+            this.PnlTitulo.Controls.Add(this.IcnLogo);
             this.PnlTitulo.Controls.Add(this.button2);
             this.PnlTitulo.Controls.Add(this.button1);
             this.PnlTitulo.Controls.Add(this.BntExit);
@@ -89,11 +101,37 @@
             this.PnlTitulo.Size = new System.Drawing.Size(350, 40);
             this.PnlTitulo.TabIndex = 2;
             // 
+            // LblCalculadora
+            // 
+            this.LblCalculadora.AutoSize = true;
+            this.LblCalculadora.BackColor = System.Drawing.Color.Transparent;
+            this.LblCalculadora.Font = new System.Drawing.Font("Arial", 10F);
+            this.LblCalculadora.ForeColor = System.Drawing.Color.Black;
+            this.LblCalculadora.Location = new System.Drawing.Point(39, 13);
+            this.LblCalculadora.Name = "LblCalculadora";
+            this.LblCalculadora.Size = new System.Drawing.Size(83, 16);
+            this.LblCalculadora.TabIndex = 3;
+            this.LblCalculadora.Text = "Calculadora";
+            // 
+            // IcnLogo
+            // 
+            this.IcnLogo.BackColor = System.Drawing.Color.Transparent;
+            this.IcnLogo.FlatAppearance.BorderSize = 0;
+            this.IcnLogo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IcnLogo.ForeColor = System.Drawing.Color.Transparent;
+            this.IcnLogo.Image = ((System.Drawing.Image)(resources.GetObject("IcnLogo.Image")));
+            this.IcnLogo.Location = new System.Drawing.Point(6, 5);
+            this.IcnLogo.Margin = new System.Windows.Forms.Padding(0);
+            this.IcnLogo.Name = "IcnLogo";
+            this.IcnLogo.Size = new System.Drawing.Size(32, 30);
+            this.IcnLogo.TabIndex = 4;
+            this.IcnLogo.UseVisualStyleBackColor = false;
+            // 
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Right;
             this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.Location = new System.Drawing.Point(200, 0);
@@ -102,12 +140,13 @@
             this.button2.Size = new System.Drawing.Size(50, 40);
             this.button2.TabIndex = 2;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.BntMinimizar_Click);
             // 
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(250, 0);
@@ -116,6 +155,7 @@
             this.button1.Size = new System.Drawing.Size(50, 40);
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.BtnMaximizar_Click);
             // 
             // BntExit
             // 
@@ -130,6 +170,7 @@
             this.BntExit.Size = new System.Drawing.Size(50, 40);
             this.BntExit.TabIndex = 0;
             this.BntExit.UseVisualStyleBackColor = true;
+            this.BntExit.Click += new System.EventHandler(this.BntExit_Click);
             // 
             // PnlHistorico
             // 
@@ -168,6 +209,7 @@
             this.BntLimparHistorico.Size = new System.Drawing.Size(350, 40);
             this.BntLimparHistorico.TabIndex = 3;
             this.BntLimparHistorico.UseVisualStyleBackColor = true;
+            this.BntLimparHistorico.Click += new System.EventHandler(this.BntLimparHistorico_Click);
             // 
             // panel1
             // 
@@ -184,13 +226,12 @@
             // 
             this.BntMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.BntMenu.FlatAppearance.BorderSize = 0;
-            this.BntMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BntMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BntMenu.Image = ((System.Drawing.Image)(resources.GetObject("BntMenu.Image")));
             this.BntMenu.Location = new System.Drawing.Point(0, 0);
             this.BntMenu.Margin = new System.Windows.Forms.Padding(0);
             this.BntMenu.Name = "BntMenu";
-            this.BntMenu.Size = new System.Drawing.Size(50, 58);
+            this.BntMenu.Size = new System.Drawing.Size(59, 58);
             this.BntMenu.TabIndex = 2;
             this.BntMenu.UseVisualStyleBackColor = true;
             // 
@@ -198,13 +239,12 @@
             // 
             this.BntHistorico.Dock = System.Windows.Forms.DockStyle.Right;
             this.BntHistorico.FlatAppearance.BorderSize = 0;
-            this.BntHistorico.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BntHistorico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BntHistorico.Image = ((System.Drawing.Image)(resources.GetObject("BntHistorico.Image")));
-            this.BntHistorico.Location = new System.Drawing.Point(300, 0);
+            this.BntHistorico.Location = new System.Drawing.Point(277, 0);
             this.BntHistorico.Margin = new System.Windows.Forms.Padding(0);
             this.BntHistorico.Name = "BntHistorico";
-            this.BntHistorico.Size = new System.Drawing.Size(50, 58);
+            this.BntHistorico.Size = new System.Drawing.Size(73, 58);
             this.BntHistorico.TabIndex = 0;
             this.BntHistorico.UseVisualStyleBackColor = true;
             this.BntHistorico.Click += new System.EventHandler(this.BntHistorico_Click);
@@ -214,7 +254,7 @@
             this.TxtDisplay2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.TxtDisplay2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtDisplay2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TxtDisplay2.Font = new System.Drawing.Font("Gadugi", 14F);
+            this.TxtDisplay2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtDisplay2.ForeColor = System.Drawing.SystemColors.MenuText;
             this.TxtDisplay2.Location = new System.Drawing.Point(0, 98);
             this.TxtDisplay2.Margin = new System.Windows.Forms.Padding(0);
@@ -226,28 +266,30 @@
             // 
             // TxtDisplay1
             // 
-            this.TxtDisplay1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.TxtDisplay1.BackColor = System.Drawing.Color.White;
             this.TxtDisplay1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TxtDisplay1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TxtDisplay1.Font = new System.Drawing.Font("Gadugi", 30F, System.Drawing.FontStyle.Bold);
+            this.TxtDisplay1.Font = new System.Drawing.Font("Arial", 34F, System.Drawing.FontStyle.Bold);
             this.TxtDisplay1.ForeColor = System.Drawing.SystemColors.MenuText;
             this.TxtDisplay1.Location = new System.Drawing.Point(0, 123);
             this.TxtDisplay1.Margin = new System.Windows.Forms.Padding(0);
             this.TxtDisplay1.Multiline = true;
             this.TxtDisplay1.Name = "TxtDisplay1";
-            this.TxtDisplay1.Size = new System.Drawing.Size(350, 50);
+            this.TxtDisplay1.Size = new System.Drawing.Size(350, 52);
             this.TxtDisplay1.TabIndex = 6;
             this.TxtDisplay1.Text = "0";
             this.TxtDisplay1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TxtDisplay1.TextChanged += new System.EventHandler(this.TxtDisplay1_TextChanged);
             // 
             // BtnRaiz
             // 
-            this.BtnRaiz.BackColor = System.Drawing.Color.Silver;
-            this.BtnRaiz.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnRaiz.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnRaiz.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnRaiz.BorderRadius = 20;
             this.BtnRaiz.BorderSize = 0;
             this.BtnRaiz.FlatAppearance.BorderSize = 0;
             this.BtnRaiz.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRaiz.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnRaiz.ForeColor = System.Drawing.Color.Black;
             this.BtnRaiz.Location = new System.Drawing.Point(176, 283);
             this.BtnRaiz.Margin = new System.Windows.Forms.Padding(0);
@@ -257,15 +299,17 @@
             this.BtnRaiz.Text = "√x";
             this.BtnRaiz.TextColor = System.Drawing.Color.Black;
             this.BtnRaiz.UseVisualStyleBackColor = false;
+            this.BtnRaiz.Click += new System.EventHandler(this.BtnOperacoes_Click);
             // 
             // BtnElevado
             // 
-            this.BtnElevado.BackColor = System.Drawing.Color.Silver;
-            this.BtnElevado.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnElevado.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnElevado.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnElevado.BorderRadius = 20;
             this.BtnElevado.BorderSize = 0;
             this.BtnElevado.FlatAppearance.BorderSize = 0;
             this.BtnElevado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnElevado.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnElevado.ForeColor = System.Drawing.Color.Black;
             this.BtnElevado.Location = new System.Drawing.Point(91, 283);
             this.BtnElevado.Margin = new System.Windows.Forms.Padding(0);
@@ -275,15 +319,17 @@
             this.BtnElevado.Text = "^2";
             this.BtnElevado.TextColor = System.Drawing.Color.Black;
             this.BtnElevado.UseVisualStyleBackColor = false;
+            this.BtnElevado.Click += new System.EventHandler(this.BtnOperacoes_Click);
             // 
             // Btn1X
             // 
-            this.Btn1X.BackColor = System.Drawing.Color.Silver;
-            this.Btn1X.BackgroundColor = System.Drawing.Color.Silver;
+            this.Btn1X.BackColor = System.Drawing.Color.DarkGray;
+            this.Btn1X.BackgroundColor = System.Drawing.Color.DarkGray;
             this.Btn1X.BorderRadius = 20;
             this.Btn1X.BorderSize = 0;
             this.Btn1X.FlatAppearance.BorderSize = 0;
             this.Btn1X.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn1X.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn1X.ForeColor = System.Drawing.Color.Black;
             this.Btn1X.Location = new System.Drawing.Point(6, 283);
             this.Btn1X.Margin = new System.Windows.Forms.Padding(0);
@@ -293,16 +339,17 @@
             this.Btn1X.Text = "¹/x";
             this.Btn1X.TextColor = System.Drawing.Color.Black;
             this.Btn1X.UseVisualStyleBackColor = false;
+            this.Btn1X.Click += new System.EventHandler(this.BtnOperacoes_Click);
             // 
             // BtnDivi
             // 
-            this.BtnDivi.BackColor = System.Drawing.Color.Silver;
-            this.BtnDivi.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnDivi.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnDivi.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnDivi.BorderRadius = 20;
             this.BtnDivi.BorderSize = 0;
             this.BtnDivi.FlatAppearance.BorderSize = 0;
             this.BtnDivi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDivi.Font = new System.Drawing.Font("Gadugi", 16F);
+            this.BtnDivi.Font = new System.Drawing.Font("Arial", 18F);
             this.BtnDivi.ForeColor = System.Drawing.Color.Black;
             this.BtnDivi.Location = new System.Drawing.Point(261, 283);
             this.BtnDivi.Margin = new System.Windows.Forms.Padding(0);
@@ -322,7 +369,7 @@
             this.BtnDecimal.BorderSize = 0;
             this.BtnDecimal.FlatAppearance.BorderSize = 0;
             this.BtnDecimal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDecimal.Font = new System.Drawing.Font("Gadugi", 16F);
+            this.BtnDecimal.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnDecimal.ForeColor = System.Drawing.Color.Black;
             this.BtnDecimal.Location = new System.Drawing.Point(176, 504);
             this.BtnDecimal.Margin = new System.Windows.Forms.Padding(0);
@@ -342,6 +389,7 @@
             this.Btn0.BorderSize = 0;
             this.Btn0.FlatAppearance.BorderSize = 0;
             this.Btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn0.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn0.ForeColor = System.Drawing.Color.Black;
             this.Btn0.Location = new System.Drawing.Point(91, 504);
             this.Btn0.Margin = new System.Windows.Forms.Padding(0);
@@ -361,7 +409,7 @@
             this.BtnPm.BorderSize = 0;
             this.BtnPm.FlatAppearance.BorderSize = 0;
             this.BtnPm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPm.Font = new System.Drawing.Font("Gadugi", 14F);
+            this.BtnPm.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnPm.ForeColor = System.Drawing.Color.Black;
             this.BtnPm.Location = new System.Drawing.Point(6, 504);
             this.BtnPm.Margin = new System.Windows.Forms.Padding(0);
@@ -371,16 +419,17 @@
             this.BtnPm.Text = "±";
             this.BtnPm.TextColor = System.Drawing.Color.Black;
             this.BtnPm.UseVisualStyleBackColor = false;
+            this.BtnPm.Click += new System.EventHandler(this.BtnOperacoes_Click);
             // 
             // BtnEquals
             // 
-            this.BtnEquals.BackColor = System.Drawing.Color.Silver;
-            this.BtnEquals.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnEquals.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BtnEquals.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
             this.BtnEquals.BorderRadius = 20;
             this.BtnEquals.BorderSize = 0;
             this.BtnEquals.FlatAppearance.BorderSize = 0;
             this.BtnEquals.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEquals.Font = new System.Drawing.Font("Gadugi", 16F);
+            this.BtnEquals.Font = new System.Drawing.Font("Arial", 18F);
             this.BtnEquals.ForeColor = System.Drawing.Color.Black;
             this.BtnEquals.Location = new System.Drawing.Point(261, 504);
             this.BtnEquals.Margin = new System.Windows.Forms.Padding(0);
@@ -400,6 +449,7 @@
             this.Btn3.BorderSize = 0;
             this.Btn3.FlatAppearance.BorderSize = 0;
             this.Btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn3.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn3.ForeColor = System.Drawing.Color.Black;
             this.Btn3.Location = new System.Drawing.Point(176, 449);
             this.Btn3.Margin = new System.Windows.Forms.Padding(0);
@@ -419,6 +469,7 @@
             this.Btn2.BorderSize = 0;
             this.Btn2.FlatAppearance.BorderSize = 0;
             this.Btn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn2.ForeColor = System.Drawing.Color.Black;
             this.Btn2.Location = new System.Drawing.Point(91, 449);
             this.Btn2.Margin = new System.Windows.Forms.Padding(0);
@@ -438,6 +489,7 @@
             this.Btn1.BorderSize = 0;
             this.Btn1.FlatAppearance.BorderSize = 0;
             this.Btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn1.ForeColor = System.Drawing.Color.Black;
             this.Btn1.Location = new System.Drawing.Point(6, 449);
             this.Btn1.Margin = new System.Windows.Forms.Padding(0);
@@ -451,13 +503,13 @@
             // 
             // BtnSoma
             // 
-            this.BtnSoma.BackColor = System.Drawing.Color.Silver;
-            this.BtnSoma.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnSoma.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnSoma.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnSoma.BorderRadius = 20;
             this.BtnSoma.BorderSize = 0;
             this.BtnSoma.FlatAppearance.BorderSize = 0;
             this.BtnSoma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSoma.Font = new System.Drawing.Font("Gadugi", 16F);
+            this.BtnSoma.Font = new System.Drawing.Font("Arial", 18F);
             this.BtnSoma.ForeColor = System.Drawing.Color.Black;
             this.BtnSoma.Location = new System.Drawing.Point(261, 449);
             this.BtnSoma.Margin = new System.Windows.Forms.Padding(0);
@@ -477,6 +529,7 @@
             this.Btn6.BorderSize = 0;
             this.Btn6.FlatAppearance.BorderSize = 0;
             this.Btn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn6.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn6.ForeColor = System.Drawing.Color.Black;
             this.Btn6.Location = new System.Drawing.Point(176, 394);
             this.Btn6.Margin = new System.Windows.Forms.Padding(0);
@@ -496,6 +549,7 @@
             this.Btn5.BorderSize = 0;
             this.Btn5.FlatAppearance.BorderSize = 0;
             this.Btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn5.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn5.ForeColor = System.Drawing.Color.Black;
             this.Btn5.Location = new System.Drawing.Point(91, 394);
             this.Btn5.Margin = new System.Windows.Forms.Padding(0);
@@ -515,6 +569,7 @@
             this.Btn4.BorderSize = 0;
             this.Btn4.FlatAppearance.BorderSize = 0;
             this.Btn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn4.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn4.ForeColor = System.Drawing.Color.Black;
             this.Btn4.Location = new System.Drawing.Point(6, 394);
             this.Btn4.Margin = new System.Windows.Forms.Padding(0);
@@ -528,13 +583,13 @@
             // 
             // BtnSub
             // 
-            this.BtnSub.BackColor = System.Drawing.Color.Silver;
-            this.BtnSub.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnSub.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnSub.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnSub.BorderRadius = 20;
             this.BtnSub.BorderSize = 0;
             this.BtnSub.FlatAppearance.BorderSize = 0;
             this.BtnSub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSub.Font = new System.Drawing.Font("Gadugi", 16F);
+            this.BtnSub.Font = new System.Drawing.Font("Arial", 18F);
             this.BtnSub.ForeColor = System.Drawing.Color.Black;
             this.BtnSub.Location = new System.Drawing.Point(261, 394);
             this.BtnSub.Margin = new System.Windows.Forms.Padding(0);
@@ -554,6 +609,7 @@
             this.Btn9.BorderSize = 0;
             this.Btn9.FlatAppearance.BorderSize = 0;
             this.Btn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn9.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn9.ForeColor = System.Drawing.Color.Black;
             this.Btn9.Location = new System.Drawing.Point(176, 339);
             this.Btn9.Margin = new System.Windows.Forms.Padding(0);
@@ -573,6 +629,7 @@
             this.Btn8.BorderSize = 0;
             this.Btn8.FlatAppearance.BorderSize = 0;
             this.Btn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn8.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn8.ForeColor = System.Drawing.Color.Black;
             this.Btn8.Location = new System.Drawing.Point(91, 339);
             this.Btn8.Margin = new System.Windows.Forms.Padding(0);
@@ -592,6 +649,7 @@
             this.Btn7.BorderSize = 0;
             this.Btn7.FlatAppearance.BorderSize = 0;
             this.Btn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn7.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn7.ForeColor = System.Drawing.Color.Black;
             this.Btn7.Location = new System.Drawing.Point(6, 339);
             this.Btn7.Margin = new System.Windows.Forms.Padding(0);
@@ -605,13 +663,13 @@
             // 
             // BtnMulti
             // 
-            this.BtnMulti.BackColor = System.Drawing.Color.Silver;
-            this.BtnMulti.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnMulti.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnMulti.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnMulti.BorderRadius = 20;
             this.BtnMulti.BorderSize = 0;
             this.BtnMulti.FlatAppearance.BorderSize = 0;
             this.BtnMulti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMulti.Font = new System.Drawing.Font("Gadugi", 13F);
+            this.BtnMulti.Font = new System.Drawing.Font("Arial", 18F);
             this.BtnMulti.ForeColor = System.Drawing.Color.Black;
             this.BtnMulti.Location = new System.Drawing.Point(261, 339);
             this.BtnMulti.Margin = new System.Windows.Forms.Padding(0);
@@ -625,12 +683,13 @@
             // 
             // BtnC
             // 
-            this.BtnC.BackColor = System.Drawing.Color.Silver;
-            this.BtnC.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnC.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnC.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnC.BorderRadius = 20;
             this.BtnC.BorderSize = 0;
             this.BtnC.FlatAppearance.BorderSize = 0;
             this.BtnC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnC.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnC.ForeColor = System.Drawing.Color.Black;
             this.BtnC.Location = new System.Drawing.Point(176, 228);
             this.BtnC.Margin = new System.Windows.Forms.Padding(0);
@@ -640,15 +699,17 @@
             this.BtnC.Text = "C";
             this.BtnC.TextColor = System.Drawing.Color.Black;
             this.BtnC.UseVisualStyleBackColor = false;
+            this.BtnC.Click += new System.EventHandler(this.BtnC_Click);
             // 
             // BtnCE
             // 
-            this.BtnCE.BackColor = System.Drawing.Color.Silver;
-            this.BtnCE.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnCE.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnCE.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnCE.BorderRadius = 20;
             this.BtnCE.BorderSize = 0;
             this.BtnCE.FlatAppearance.BorderSize = 0;
             this.BtnCE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCE.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCE.ForeColor = System.Drawing.Color.Black;
             this.BtnCE.Location = new System.Drawing.Point(91, 228);
             this.BtnCE.Margin = new System.Windows.Forms.Padding(0);
@@ -658,16 +719,17 @@
             this.BtnCE.Text = "CE";
             this.BtnCE.TextColor = System.Drawing.Color.Black;
             this.BtnCE.UseVisualStyleBackColor = false;
+            this.BtnCE.Click += new System.EventHandler(this.BtnCE_Click);
             // 
             // BtnPorcen
             // 
-            this.BtnPorcen.BackColor = System.Drawing.Color.Silver;
-            this.BtnPorcen.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnPorcen.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnPorcen.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnPorcen.BorderRadius = 20;
             this.BtnPorcen.BorderSize = 0;
             this.BtnPorcen.FlatAppearance.BorderSize = 0;
             this.BtnPorcen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPorcen.Font = new System.Drawing.Font("Gadugi", 14F);
+            this.BtnPorcen.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnPorcen.ForeColor = System.Drawing.Color.Black;
             this.BtnPorcen.Location = new System.Drawing.Point(6, 228);
             this.BtnPorcen.Margin = new System.Windows.Forms.Padding(0);
@@ -677,6 +739,7 @@
             this.BtnPorcen.Text = "%";
             this.BtnPorcen.TextColor = System.Drawing.Color.Black;
             this.BtnPorcen.UseVisualStyleBackColor = false;
+            this.BtnPorcen.Click += new System.EventHandler(this.BtnOperacoes_Click);
             // 
             // mordenButtonCalculater7
             // 
@@ -686,14 +749,15 @@
             this.mordenButtonCalculater7.BorderSize = 0;
             this.mordenButtonCalculater7.FlatAppearance.BorderSize = 0;
             this.mordenButtonCalculater7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mordenButtonCalculater7.ForeColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater7.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mordenButtonCalculater7.ForeColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater7.Location = new System.Drawing.Point(226, 186);
             this.mordenButtonCalculater7.Margin = new System.Windows.Forms.Padding(0);
             this.mordenButtonCalculater7.Name = "mordenButtonCalculater7";
             this.mordenButtonCalculater7.Size = new System.Drawing.Size(50, 30);
             this.mordenButtonCalculater7.TabIndex = 13;
             this.mordenButtonCalculater7.Text = "MS";
-            this.mordenButtonCalculater7.TextColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater7.TextColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater7.UseVisualStyleBackColor = false;
             // 
             // mordenButtonCalculater6
@@ -704,14 +768,15 @@
             this.mordenButtonCalculater6.BorderSize = 0;
             this.mordenButtonCalculater6.FlatAppearance.BorderSize = 0;
             this.mordenButtonCalculater6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mordenButtonCalculater6.ForeColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater6.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mordenButtonCalculater6.ForeColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater6.Location = new System.Drawing.Point(175, 186);
             this.mordenButtonCalculater6.Margin = new System.Windows.Forms.Padding(0);
             this.mordenButtonCalculater6.Name = "mordenButtonCalculater6";
             this.mordenButtonCalculater6.Size = new System.Drawing.Size(50, 30);
             this.mordenButtonCalculater6.TabIndex = 12;
             this.mordenButtonCalculater6.Text = "M-";
-            this.mordenButtonCalculater6.TextColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater6.TextColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater6.UseVisualStyleBackColor = false;
             // 
             // mordenButtonCalculater5
@@ -722,14 +787,15 @@
             this.mordenButtonCalculater5.BorderSize = 0;
             this.mordenButtonCalculater5.FlatAppearance.BorderSize = 0;
             this.mordenButtonCalculater5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mordenButtonCalculater5.ForeColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater5.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mordenButtonCalculater5.ForeColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater5.Location = new System.Drawing.Point(124, 186);
             this.mordenButtonCalculater5.Margin = new System.Windows.Forms.Padding(0);
             this.mordenButtonCalculater5.Name = "mordenButtonCalculater5";
             this.mordenButtonCalculater5.Size = new System.Drawing.Size(50, 30);
             this.mordenButtonCalculater5.TabIndex = 11;
             this.mordenButtonCalculater5.Text = "M+";
-            this.mordenButtonCalculater5.TextColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater5.TextColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater5.UseVisualStyleBackColor = false;
             // 
             // mordenButtonCalculater4
@@ -740,14 +806,15 @@
             this.mordenButtonCalculater4.BorderSize = 0;
             this.mordenButtonCalculater4.FlatAppearance.BorderSize = 0;
             this.mordenButtonCalculater4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mordenButtonCalculater4.ForeColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater4.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mordenButtonCalculater4.ForeColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater4.Location = new System.Drawing.Point(73, 186);
             this.mordenButtonCalculater4.Margin = new System.Windows.Forms.Padding(0);
             this.mordenButtonCalculater4.Name = "mordenButtonCalculater4";
             this.mordenButtonCalculater4.Size = new System.Drawing.Size(50, 30);
             this.mordenButtonCalculater4.TabIndex = 10;
             this.mordenButtonCalculater4.Text = "MR";
-            this.mordenButtonCalculater4.TextColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater4.TextColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater4.UseVisualStyleBackColor = false;
             // 
             // mordenButtonCalculater3
@@ -758,14 +825,15 @@
             this.mordenButtonCalculater3.BorderSize = 0;
             this.mordenButtonCalculater3.FlatAppearance.BorderSize = 0;
             this.mordenButtonCalculater3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mordenButtonCalculater3.ForeColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater3.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mordenButtonCalculater3.ForeColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater3.Location = new System.Drawing.Point(22, 186);
             this.mordenButtonCalculater3.Margin = new System.Windows.Forms.Padding(0);
             this.mordenButtonCalculater3.Name = "mordenButtonCalculater3";
             this.mordenButtonCalculater3.Size = new System.Drawing.Size(50, 30);
             this.mordenButtonCalculater3.TabIndex = 9;
             this.mordenButtonCalculater3.Text = "MC";
-            this.mordenButtonCalculater3.TextColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater3.TextColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater3.UseVisualStyleBackColor = false;
             // 
             // mordenButtonCalculater2
@@ -776,20 +844,21 @@
             this.mordenButtonCalculater2.BorderSize = 0;
             this.mordenButtonCalculater2.FlatAppearance.BorderSize = 0;
             this.mordenButtonCalculater2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.mordenButtonCalculater2.ForeColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mordenButtonCalculater2.ForeColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater2.Location = new System.Drawing.Point(277, 186);
             this.mordenButtonCalculater2.Margin = new System.Windows.Forms.Padding(0);
             this.mordenButtonCalculater2.Name = "mordenButtonCalculater2";
             this.mordenButtonCalculater2.Size = new System.Drawing.Size(50, 30);
             this.mordenButtonCalculater2.TabIndex = 8;
             this.mordenButtonCalculater2.Text = "M~";
-            this.mordenButtonCalculater2.TextColor = System.Drawing.Color.Black;
+            this.mordenButtonCalculater2.TextColor = System.Drawing.Color.Red;
             this.mordenButtonCalculater2.UseVisualStyleBackColor = false;
             // 
             // BtnApagar
             // 
-            this.BtnApagar.BackColor = System.Drawing.Color.Silver;
-            this.BtnApagar.BackgroundColor = System.Drawing.Color.Silver;
+            this.BtnApagar.BackColor = System.Drawing.Color.DarkGray;
+            this.BtnApagar.BackgroundColor = System.Drawing.Color.DarkGray;
             this.BtnApagar.BorderRadius = 20;
             this.BtnApagar.BorderSize = 0;
             this.BtnApagar.FlatAppearance.BorderSize = 0;
@@ -803,6 +872,7 @@
             this.BtnApagar.TabIndex = 7;
             this.BtnApagar.TextColor = System.Drawing.Color.White;
             this.BtnApagar.UseVisualStyleBackColor = false;
+            this.BtnApagar.Click += new System.EventHandler(this.BtnApagar_Click);
             // 
             // ellipseControl1
             // 
@@ -857,6 +927,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.PnlTitulo.ResumeLayout(false);
+            this.PnlTitulo.PerformLayout();
             this.PnlHistorico.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -909,6 +980,8 @@
         private MorderButton.MordenButtonCalculater BtnElevado;
         private MorderButton.MordenButtonCalculater Btn1X;
         private MorderButton.MordenButtonCalculater BtnDivi;
+        private System.Windows.Forms.Label LblCalculadora;
+        private System.Windows.Forms.Button IcnLogo;
     }
 }
 
